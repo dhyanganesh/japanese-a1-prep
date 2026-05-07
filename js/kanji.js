@@ -119,7 +119,7 @@ function skipKanji() {
 
 function initKanjiGame() {
   const tf = document.getElementById('topicFilter');
-  const topicLabels = ['Names', 'Family', 'Food', 'Home & Location', 'Time & Days'];
+  const topicLabels = ['Names & Identity', 'Family & Japan', 'Food', 'Home & Location', 'Time & Days'];
   [1, 2, 3, 4, 5].forEach(t => {
     const p = document.createElement('button');
     p.className = 'topic-pill active';

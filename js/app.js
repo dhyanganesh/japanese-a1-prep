@@ -18,5 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initKanjiGame();
   initSentences();
   initDialogues();
+  initCounters();
   try { navigator.wakeLock?.request('screen'); } catch (e) {}
 });

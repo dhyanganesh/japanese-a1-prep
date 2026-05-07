@@ -468,3 +468,50 @@ body::before {
   margin-top: 14px;
 }
 .play-dialogue-btn:hover { background: #d63b32; }
+
+/* ── COUNTER TABLE ── */
+.counter-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.counter-table th {
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.counter-row {
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
+}
+.counter-row:hover { background: var(--surface2); }
+.counter-num {
+  padding: 12px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+  width: 40px;
+}
+.counter-ja {
+  padding: 12px 8px;
+  font-size: 20px;
+  color: var(--ja-color);
+}
+.counter-r {
+  padding: 12px 8px;
+  font-size: 12px;
+  color: var(--en-color);
+}
+.counter-play {
+  padding: 12px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+.counter-row:hover .counter-play { color: var(--accent); }

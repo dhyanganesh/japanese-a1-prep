@@ -14,6 +14,7 @@
   <button class="nav-tab" onclick="showPage('kanji',this)">漢字 Game</button>
   <button class="nav-tab" onclick="showPage('sentences',this)">📖 Sentences</button>
   <button class="nav-tab" onclick="showPage('dialogues',this)">💬 Can-do</button>
+  <button class="nav-tab" onclick="showPage('counters',this)">🔢 Counters</button>
 </nav>
 
 <!-- PAGE 1: AUDIO PLAYER -->
@@ -224,6 +225,38 @@
   </div>
 </div>
 
+<!-- PAGE 6: COUNTERS -->
+<div id="page-counters" class="page">
+  <div class="container">
+    <div class="game-header">
+      <h2>かずとかぞえかた</h2>
+      <p>Numbers &amp; How to Count — tap any row to hear it</p>
+    </div>
+
+    <div class="topic-filter" id="counterPills" style="margin-bottom:16px;"></div>
+
+    <div class="card" style="padding:12px 16px;margin-bottom:12px;">
+      <div id="counterSuffix" style="font-size:18px;font-weight:700;color:var(--ja-color);margin-bottom:6px;"></div>
+      <div id="counterNote" style="font-size:13px;color:var(--en-color);line-height:1.6;margin-bottom:4px;"></div>
+      <div id="counterExample" style="font-size:12px;color:var(--muted);"></div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="counter-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Japanese</th>
+            <th>Reading</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="counterTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <!-- Scripts: data first, then modules, then app -->
 <script src="js/data.js"></script>
 <script src="js/tts.js"></script>
@@ -232,6 +265,7 @@
 <script src="js/kanji.js"></script>
 <script src="js/sentences.js"></script>
 <script src="js/dialogues.js"></script>
+<script src="js/counters.js"></script>
 <script src="js/app.js"></script>
 
 </body>

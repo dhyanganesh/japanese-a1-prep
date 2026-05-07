@@ -19,5 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSentences();
   initDialogues();
   initCounters();
+  initParticles();
   try { navigator.wakeLock?.request('screen'); } catch (e) {}
 });

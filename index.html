@@ -15,6 +15,7 @@
   <button class="nav-tab" onclick="showPage('sentences',this)">📖 Sentences</button>
   <button class="nav-tab" onclick="showPage('dialogues',this)">💬 Can-do</button>
   <button class="nav-tab" onclick="showPage('counters',this)">🔢 Counters</button>
+  <button class="nav-tab" onclick="showPage('particles',this)">🔤 Particles</button>
 </nav>
 
 <!-- PAGE 1: AUDIO PLAYER -->
@@ -257,6 +258,57 @@
   </div>
 </div>
 
+<!-- PAGE 7: PARTICLES -->
+<div id="page-particles" class="page">
+  <div class="container">
+    <div class="game-header">
+      <h2>助詞の練習</h2>
+      <p>Particle Guide &amp; Fill-in-the-Blank Practice</p>
+    </div>
+
+    <div class="ptab-row">
+      <button class="ptab-btn active" onclick="showPTab('guide',this)">📚 Guide</button>
+      <button class="ptab-btn" onclick="showPTab('practice',this)">✏️ Practice</button>
+    </div>
+
+    <!-- GUIDE TAB -->
+    <div id="pGuide">
+      <div class="card-label">12 Essential A1 Particles — tap any to read</div>
+      <div id="pGuideList"></div>
+    </div>
+
+    <!-- PRACTICE TAB -->
+    <div id="pPractice" style="display:none">
+
+      <div class="score-bar">
+        <div class="score-chip"><div class="val green" id="pScoreC">0</div><div class="lbl">Correct</div></div>
+        <div class="score-chip"><div class="val red"   id="pScoreW">0</div><div class="lbl">Wrong</div></div>
+      </div>
+
+      <div class="p-practice-header">
+        <span id="pContext"></span>
+        <span id="pProgress"></span>
+      </div>
+
+      <div class="pdisplay-card">
+        <div id="pDisplay"></div>
+      </div>
+
+      <div class="card-label">Tap a blank ①②③ then choose a particle</div>
+      <div class="p-particle-grid" id="pParticleGrid"></div>
+
+      <div id="pExp" style="display:none"></div>
+
+      <div class="game-controls">
+        <button class="game-btn secondary" onclick="prevP()">← Prev</button>
+        <button class="game-btn primary"   id="pCheckBtn" onclick="checkP()" style="display:none">Check ✓</button>
+        <button class="game-btn primary"   id="pNextBtn"  onclick="nextP()"  style="display:none">Next →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- Scripts: data first, then modules, then app -->
 <script src="js/data.js"></script>
 <script src="js/tts.js"></script>
@@ -266,6 +318,7 @@
 <script src="js/sentences.js"></script>
 <script src="js/dialogues.js"></script>
 <script src="js/counters.js"></script>
+<script src="js/particles.js"></script>
 <script src="js/app.js"></script>
 
 </body>

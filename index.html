@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日本語 A1 — Dhyan's Viva Prep</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <button class="nav-tab active" onclick="showPage('player',this)">🎧 Audio</button>
+  <button class="nav-tab" onclick="showPage('intro',this)">🙋 Self Intro</button>
+  <button class="nav-tab" onclick="showPage('kanji',this)">漢字 Game</button>
+  <button class="nav-tab" onclick="showPage('sentences',this)">📖 Sentences</button>
+  <button class="nav-tab" onclick="showPage('dialogues',this)">💬 Can-do</button>
+</nav>
+
+<!-- PAGE 1: AUDIO PLAYER -->
+<div id="page-player" class="page active">
+  <div class="container">
+    <div class="header">
+      <div class="flag">🇯🇵</div>
+      <h1>日本語 A1 Audio Learner</h1>
+      <p>Dhyan's Viva Prep • Lessons 1–10 + Counters</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Select Lesson</div>
+      <div class="lesson-grid" id="lessonGrid"></div>
+    </div>
+
+    <div class="now-playing" id="nowPlaying">
+      <div class="lang-badge idle" id="langBadge">Ready</div>
+      <div class="current-text" id="currentText">Select a lesson and press Play</div>
+      <div class="progress-line" id="progressLine"></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="main-controls">
+        <button class="ctrl-btn sm" onclick="prevItem()">⏮</button>
+        <button class="ctrl-btn sm" onclick="restart()">↩</button>
+        <button class="ctrl-btn lg" id="playBtn" onclick="togglePlay()">▶</button>
+        <button class="ctrl-btn sm" onclick="nextItem()">⏭</button>
+        <button class="ctrl-btn sm" onclick="toggleRepeat()" id="repeatBtn">🔁</button>
+      </div>
+      <div class="settings-row">
+        <div class="setting-item">
+          <label>Pause (sec)</label>
+          <input type="range" min="0.5" max="4" step="0.5" value="1.5" id="pauseSlider" oninput="updatePause(this)">
+          <div class="range-val" id="pauseVal">1.5s</div>
+        </div>
+        <div class="setting-item">
+          <label>JP Speed</label>
+          <input type="range" min="0.5" max="1.2" step="0.1" value="0.8" id="speedSlider" oninput="updateSpeed(this)">
+          <div class="range-val" id="speedVal">0.8×</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="queue-wrap">
+      <div class="queue-header">
+        <span>Up Next</span>
+        <span id="queueCount" style="color:var(--text)"></span>
+      </div>
+      <div class="queue-list" id="queueList"></div>
+    </div>
+
+    <div class="status-bar" id="statusBar">Tap a lesson to begin</div>
+  </div>
+</div>
+
+<!-- PAGE 2: SELF INTRO -->
+<div id="page-intro" class="page">
+  <div class="container">
+    <div class="intro-card">
+      <div class="card-label">じこしょうかい — Self Introduction</div>
+      <div class="intro-name">ディヤン ガネーシュ S</div>
+      <div class="intro-line">
+        <div class="intro-q">Greeting</div>
+        <div><div class="intro-ja">はじめまして。</div><div class="intro-en">Nice to meet you. (L1 expression)</div></div>
+      </div>
+      <div class="intro-line">
+        <div class="intro-q">Name</div>
+        <div><div class="intro-ja">ディヤン ガネーシュ Sともうします。</div><div class="intro-en">My name is Dhyan Ganesh S. (ともうします = L3 humble name form)</div></div>
+      </div>
+      <div class="intro-line">
+        <div class="intro-q">Country</div>
+        <div><div class="intro-ja">インドじんです。</div><div class="intro-en">I am Indian. (じん = nationality suffix from L3)</div></div>
+      </div>
+      <div class="intro-line">
+        <div class="intro-q">City</div>
+        <div><div class="intro-ja">ベンガルールにすんでいます。</div><div class="intro-en">I live in Bengaluru. (にすんでいます = L4 expression)</div></div>
+      </div>
+      <div class="intro-line">
+        <div class="intro-q">Job</div>
+        <div><div class="intro-ja">エンジニアです。</div><div class="intro-en">I am an engineer. (エンジニア = L3 profession)</div></div>
+      </div>
+      <div class="intro-line">
+        <div class="intro-q">Japanese</div>
+        <div><div class="intro-ja">にほんごをべんきょうちゅうです。</div><div class="intro-en">I am currently studying Japanese. (べんきょうちゅう = L3 expression)</div></div>
+      </div>
+      <div class="intro-line">
+        <div class="intro-q">Closing</div>
+        <div><div class="intro-ja">どうぞよろしくおねがいします。</div><div class="intro-en">Pleased to meet you. (L3 closing expression)</div></div>
+      </div>
+    </div>
+
+    <button class="play-intro-btn" onclick="playFullIntro()">▶ Play Full Self Introduction</button>
+    <button class="play-intro-btn sec" onclick="playIntroSlow()">🐢 Play Slowly — Line by Line</button>
+
+    <div class="card">
+      <div class="card-label">🎤 Viva Q&amp;A Practice — Tap to reveal answer</div>
+      <div id="vivaQA"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💡 Viva Tips for Dhyan</div>
+      <div style="font-size:13px;line-height:2;color:var(--muted);">
+        <p>✅ Always start with <span style="color:var(--ja-color)">はじめまして</span> — L1</p>
+        <p>✅ If stuck, say <span style="color:var(--ja-color)">あのう...</span> to think — L3</p>
+        <p>✅ Don't understand? <span style="color:var(--ja-color)">わかりません。もういちどおねがいします。</span> — L2</p>
+        <p>✅ Want slower? <span style="color:var(--ja-color)">ゆっくりおねがいします。</span> — L2</p>
+        <p>✅ End every sentence with <span style="color:var(--ja-color)">です</span> or <span style="color:var(--ja-color)">ます</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: KANJI GAME -->
+<div id="page-kanji" class="page">
+  <div class="container">
+    <div class="game-header">
+      <h2>漢字ゲーム</h2>
+      <p>All kanji shown once per round — fully randomized!</p>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-chip"><div class="val green" id="scoreCorrect">0</div><div class="lbl">Correct</div></div>
+      <div class="score-chip"><div class="val red"   id="scoreWrong">0</div><div class="lbl">Wrong</div></div>
+      <div class="score-chip"><div class="val yellow" id="scoreStreak">0</div><div class="lbl">Streak 🔥</div></div>
+    </div>
+
+    <div class="progress-chip">
+      <span>Round progress:</span>
+      <strong id="roundProgress">0 / 0</strong>
+      <span style="margin-left:auto;font-size:11px;" id="roundNum">Round 1</span>
+    </div>
+
+    <div class="round-complete" id="roundComplete">
+      <h3>🎉 Round Complete!</h3>
+      <p id="roundSummary">Great job! Starting new round...</p>
+    </div>
+
+    <div class="card-label">Filter Topics</div>
+    <div class="topic-filter" id="topicFilter"></div>
+
+    <div class="kanji-card" id="kanjiCard">
+      <div class="topic-badge" id="kTopicBadge">Topic 1</div>
+      <div class="kanji-display" id="kanjiDisplay">名前</div>
+      <div class="kanji-hint" id="kanjiHint">What does this mean in English?</div>
+    </div>
+
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="reveal-area" id="revealArea"></div>
+
+    <div class="game-controls">
+      <button class="game-btn secondary" onclick="skipKanji()">Skip ⏭</button>
+      <button class="game-btn primary" id="nextKanjiBtn" onclick="nextKanji()" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: SENTENCES -->
+<div id="page-sentences" class="page">
+  <div class="container">
+    <div class="game-header">
+      <h2>文を読もう</h2>
+      <p>Tap yellow kanji to hear — all vocab from L1–L10</p>
+    </div>
+
+    <div class="sentence-counter" id="sentenceCounter">Sentence 1 of 35</div>
+
+    <div class="sentence-card">
+      <div class="sentence-jp" id="sentenceJP"></div>
+      <div class="sentence-en" id="sentenceEN"></div>
+      <div class="sentence-romaji" id="sentenceRomaji"></div>
+    </div>
+
+    <div class="hint-box" id="hintBox">
+      <strong>📖 Kanji in this sentence</strong>
+      <span id="hintContent"></span>
+    </div>
+
+    <div class="sentence-nav">
+      <button class="snav-btn" onclick="prevSentence()">← Prev</button>
+      <button class="snav-btn play-s" onclick="playSentence()">▶ Listen</button>
+      <button class="snav-btn" onclick="toggleHint()">💡 Hint</button>
+      <button class="snav-btn" onclick="nextSentence()">Next →</button>
+    </div>
+
+    <div class="card">
+      <div class="card-label">漢字 Quick Reference — Tap any to hear</div>
+      <div id="kanjiRef" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: CAN-DO DIALOGUES -->
+<div id="page-dialogues" class="page">
+  <div class="container">
+    <div class="game-header">
+      <h2>できること練習</h2>
+      <p>Can-do dialogues from your memo notes — tap any line to hear it</p>
+    </div>
+
+    <div class="card-label">Select Lesson</div>
+    <div class="topic-filter" id="dialogueLessonFilter" style="margin-bottom:18px;"></div>
+
+    <div id="dialogueCards"></div>
+  </div>
+</div>
+
+<!-- Scripts: data first, then modules, then app -->
+<script src="js/data.js"></script>
+<script src="js/tts.js"></script>
+<script src="js/player.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/kanji.js"></script>
+<script src="js/sentences.js"></script>
+<script src="js/dialogues.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

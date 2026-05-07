@@ -491,6 +491,9 @@ body::before {
   border-bottom: 1px solid var(--border);
 }
 .counter-row:hover { background: var(--surface2); }
+.counter-row.irregular { background: rgba(255,160,0,0.10); }
+.counter-row.irregular .counter-ja { color: #f5a200; }
+.counter-row.irregular:hover { background: rgba(255,160,0,0.20); }
 .counter-num {
   padding: 12px 12px;
   font-size: 15px;
